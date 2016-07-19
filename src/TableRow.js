@@ -11,7 +11,7 @@ const columnToCell = (column, props) => <TableCell
     format={column.format}/>;
 
 TableRow.propTypes = {
-    columns: React.PropTypes.array.isRequired,
+    columns: React.PropTypes.object.isRequired,
     row: React.PropTypes.array.isRequired
 };
 

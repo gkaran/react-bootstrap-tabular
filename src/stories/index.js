@@ -47,7 +47,28 @@ const columns = [
 const data = [
     {index: 1, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
     {index: 2, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
-    {index: 3, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99}
+    {index: 3, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 4, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 5, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 6, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 7, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 8, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 9, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 10, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 11, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 12, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 13, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 14, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 15, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 16, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 17, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 18, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 19, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 20, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 21, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99},
+    {index: 22, name: 'Mark', lastName: 'Otto', username: '@mdo', money: 500},
+    {index: 23, name: 'Jacob', lastName: 'Thornton', username: '@fat', money: 100},
+    {index: 24, name: 'Larry', lastName: 'the Bird', username: '@twitter', money: 99}
 ];
 
 const wrap = (table) => {
@@ -72,5 +93,8 @@ storiesOf('BootstrapDataTable', module)
     ))
     .add('responsive view', () => (
         wrap(<BootstrapDataTable data={data} responsive>{columns}</BootstrapDataTable>)
+    ))
+    .add('pagination view', () => (
+        wrap(<BootstrapDataTable data={data} pagination>{columns}</BootstrapDataTable>)
     ));
 
