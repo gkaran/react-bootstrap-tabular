@@ -1,3 +1,3 @@
-# React Bootstrap Datatable Component
+# React Bootstrap Tabular Component
 
-React Bootstrap Datatable Component
+React Bootstrap Tabular Component
