@@ -3,6 +3,7 @@ import classnames from "classnames";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import PaginationComponent from './PaginationComponent';
+import SearchEntry from './SearchEntry';
 
 const SORT_ASCENDING = 1;
 const SORT_DESCENDING = -1;
@@ -15,7 +16,8 @@ class BootstrapDataTable extends React.Component {
             sortColumn: null,
             sortOrder: 0,
             pages: [],
-            currentPage: 0
+            currentPage: 0,
+            searchTerm: ''
         };
     }
 
@@ -29,9 +31,7 @@ class BootstrapDataTable extends React.Component {
 
     initTable(props) {
         const columns = React.Children.map(props.children, column => column.props);
-        const columnsWithTotals = columns
-            .filter(column => column.showTotal)
-            .map(column => column.property);
+        const columnsWithTotals = this.getFilteredColumnProperties(column => column.showTotal, props);
 
         const data = props.data.slice();
         let totals = [];
@@ -40,19 +40,21 @@ class BootstrapDataTable extends React.Component {
             totals = this.computeTotals(data, columnsWithTotals);
         }
 
-        const pages = props.pagination ? this.splitToPages(data, props.pageSize) : [];
+        const pages = this.splitToPages(data, props);
 
-        this.setState({columns, totals, data, pages});
+        this.setState({columns, totals, data, pages, initialData: data});
     }
 
-    splitToPages(data, pageSize) {
+    splitToPages(data, {pageSize, pagination}) {
         const pages = [];
-        let i = 0;
-        let page = data.slice(i, i + pageSize);
-        while (page.length) {
-            pages.push(page);
-            i += pageSize;
-            page = data.slice(i, i + pageSize);
+        if (pagination) {
+            let i = 0;
+            let page = data.slice(i, i + pageSize);
+            while (page.length) {
+                pages.push(page);
+                i += pageSize;
+                page = data.slice(i, i + pageSize);
+            }
         }
 
         return pages;
@@ -68,9 +70,38 @@ class BootstrapDataTable extends React.Component {
                 .reduce((c, d) => Object.assign({}, c, d), {}));
     }
 
+    onSearchTermChanged(e) {
+        const searchTerm = e.target.value;
+        const searchableColumns = this.getFilteredColumnProperties(column => column.includeInSearch);
+        let data = this.state.initialData.slice().filter(row => {
+            for (const column of searchableColumns) {
+                if (row[column].indexOf(searchTerm) >= 0) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        if (this.state.sortColumn) {
+            data = this.sortData(data, this.state.sortColumn, this.state.sortOrder);
+        }
+
+        const pages = this.splitToPages(data, this.props);
+
+        this.setState({searchTerm, data, pages, currentPage: 0});
+    }
+
+    getFilteredColumnProperties(filterPredicate = () => true, props = this.props) {
+        const columns = React.Children.map(props.children, column => column.props);
+        return columns.filter(filterPredicate).map(column => column.property);
+    }
+
     render() {
         return (
             <div style={{width: '100%'}}>
+                <SearchEntry visible={this.props.searchable}
+                             onSearchTermChanged={this.onSearchTermChanged.bind(this)}
+                             searchTerm={this.state.searchTerm}/>
                 {this.wrapResponsive(this.getTable())}
                 <PaginationComponent
                     currentPage={this.state.currentPage}
@@ -101,7 +132,7 @@ class BootstrapDataTable extends React.Component {
                     sortBy={this.sortBy.bind(this)}
                     sortColumn={this.state.sortColumn}
                     sortOrder={this.state.sortOrder}/>
-                <TableBody data={this.props.pagination ? this.state.pages[this.state.currentPage] : this.state.data}
+                <TableBody data={this.props.pagination ? this.state.pages[this.state.currentPage] || [] : this.state.data}
                            columns={this.state.columns}
                            totals={this.state.totals}/>
             </table>
@@ -117,6 +148,7 @@ class BootstrapDataTable extends React.Component {
 
     sortBy(column) {
         const updatedState = {};
+
         if (this.state.sortColumn === column) {
             updatedState.sortOrder = this.state.sortOrder * -1;
 
@@ -127,20 +159,24 @@ class BootstrapDataTable extends React.Component {
             });
         }
 
+        const data = this.sortData(this.state.data, column, updatedState.sortOrder);
+        const pages = this.splitToPages(data, this.props);
+
+        this.setState(Object.assign(updatedState, { data, pages }));
+    }
+
+    sortData(data, column, sortOrder = SORT_ASCENDING) {
         const sort = (a, b) => {
             if (a[column.property] > b[column.property]) {
-                return SORT_ASCENDING * updatedState.sortOrder;
+                return SORT_ASCENDING * sortOrder;
             }
             if (a[column.property] < b[column.property]) {
-                return SORT_DESCENDING * updatedState.sortOrder;
+                return SORT_DESCENDING * sortOrder;
             }
             return 0;
         };
 
-        const data = this.state.data.slice().sort(sort);
-        const pages = this.props.pagination ? this.splitToPages(data, this.props.pageSize) : [];
-
-        this.setState(Object.assign(updatedState, { data, pages }));
+        return data.slice().sort(sort);
     }
 
 }
@@ -154,7 +190,8 @@ BootstrapDataTable.propTypes = {
     data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     pagination: React.PropTypes.bool,
     pageSize: React.PropTypes.number,
-    maxPages: React.PropTypes.number
+    maxPages: React.PropTypes.number,
+    searchable: React.PropTypes.bool
 };
 
 BootstrapDataTable.defaultProps = {
@@ -165,7 +202,8 @@ BootstrapDataTable.defaultProps = {
     condensed: false,
     pagination: false,
     pageSize: 10,
-    maxPages: 5
+    maxPages: 5,
+    searchable: false
 };
 
 export default BootstrapDataTable;

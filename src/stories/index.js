@@ -31,12 +31,15 @@ const columns = [
     <BootstrapDataColumn
         property='name'
         sortable
+        includeInSearch
         name="Name"/>,
     <BootstrapDataColumn
         property='lastName'
+        includeInSearch
         name="Last Name"/>,
     <BootstrapDataColumn
         property='username'
+        includeInSearch
         name="Username"
         format={(cell, row) => cell ? <span>[ {cell} ]</span>: null}/>,
     <BootstrapDataColumn
@@ -80,5 +83,11 @@ storiesOf('BootstrapDataTable', module)
     ))
     .add('pagination view', () => (
         wrap(<BootstrapDataTable data={genData(100)} pagination>{columns}</BootstrapDataTable>)
+    ))
+    .add('searchable view', () => (
+        wrap(<BootstrapDataTable data={genData(100)} searchable>{columns}</BootstrapDataTable>)
+    ))
+    .add('searchable view with pagination', () => (
+        wrap(<BootstrapDataTable data={genData(100)} searchable pagination>{columns}</BootstrapDataTable>)
     ));
 

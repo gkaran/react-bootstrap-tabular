@@ -44,7 +44,7 @@ class PaginationComponent extends React.Component {
 
     getLeftAndRightNumberOfPages(currentPage) {
         const visibleNumberOfPages = this.props.pages < this.props.maxPages  ? this.props.pages : this.props.maxPages;
-        let left = Math.floor(visibleNumberOfPages / 2.0);
+        let left = visibleNumberOfPages === 2 ? 0 : Math.floor(visibleNumberOfPages / 2.0);
         let right = visibleNumberOfPages - left;
         if (left % 2 === 0) {
             right--;
@@ -61,6 +61,7 @@ class PaginationComponent extends React.Component {
             right--;
         }
 
+        console.log(currentPage, visibleNumberOfPages, left, right);
         return {left, right};
     }
 

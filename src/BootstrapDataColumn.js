@@ -12,12 +12,14 @@ BootstrapDataColumn.propTypes = {
     format: React.PropTypes.func,
     formatTotal: React.PropTypes.func,
     showTotal: React.PropTypes.bool,
-    sortable: React.PropTypes.bool
+    sortable: React.PropTypes.bool,
+    includeInSearch: React.PropTypes.bool
 };
 
 BootstrapDataColumn.defaultProps = {
     showTotal: false,
-    sortable: false
+    sortable: false,
+    includeInSearch: false
 };
 
 export default BootstrapDataColumn;
