@@ -52,7 +52,7 @@ describe('PaginationComponent', () => {
         expect(tiles.at(0).key()).to.be.equal('0-⏪');
         expect(tiles.at(1).key()).to.be.equal('8-◂');
         Array.from({length: 5}, (v,k)=> k+2)
-            .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${4+i}-${4+i+1}`));
+            .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${3+i}-${3+i+1}`));
 
 
         Array.from({length: 5}, (v,k)=>k)
