@@ -1,10 +1,10 @@
 {
-  "name": "react-bootstrap-datatable",
-  "version": "0.0.0",
-  "description": "React Bootstrap Datatable Component",
+  "name": "react-bootstrap-tabular",
+  "version": "0.0.1",
+  "description": "React Bootstrap Table Component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/you/repo.git"
+    "url": "https://github.com/gkaran/react-bootstrap-tabular.git"
   },
   "license": "MIT",
   "scripts": {
