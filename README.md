@@ -2,7 +2,7 @@
 
 React Bootstrap Tabular Component
 
-[![NPM version][npm-badge]][npm]
+[![NPM version][npm-badge]][npm] [![Build Status][travis-ci-image]][travis-ci-url]
 
 [![Dependency Status][deps-badge]][deps]
 [![devDependencies Status][dev-deps-badge]][dev-deps]
@@ -22,3 +22,6 @@ React Bootstrap Tabular Component
 
 [peer-deps-badge]: https://david-dm.org/gkaran/react-bootstrap-tabular/peer-status.svg
 [peer-deps]: https://david-dm.org/gkaran/react-bootstrap-tabular?type=peer
+
+[travis-ci-image]: https://travis-ci.org/gkaran/react-bootstrap-tabular.svg
+[travis-ci-url]: https://travis-ci.org/gkaran/react-bootstrap-tabular
