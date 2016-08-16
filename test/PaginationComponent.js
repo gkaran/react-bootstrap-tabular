@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import PaginationComponent from '../PaginationComponent';
+import PaginationComponent from '../src/PaginationComponent';
 import {expect} from 'chai';
 import sinon from 'sinon';
 const {describe, it} = global;
