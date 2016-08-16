@@ -5,7 +5,7 @@ class TableCell extends React.Component {
     render() {
         return (
             <td>
-                {this.props.format(this.props.cell, this.props.row)}
+                {this.props.format ? this.props.format(this.props.cell, this.props.row) : this.props.cell}
             </td>
         );
     }

@@ -8,11 +8,16 @@ const TableRow = (props) => (
 const columnToCell = (column, props) => <TableCell
     cell={props.row[column.property]}
     row={props.row}
-    format={column.format}/>;
+    format={props.totals ? column.formatTotal || column.format : column.format}/>;
 
 TableRow.propTypes = {
     columns: React.PropTypes.object.isRequired,
-    row: React.PropTypes.array.isRequired
+    row: React.PropTypes.array.isRequired,
+    totals: React.PropTypes.bool
+};
+
+TableRow.defaultProps = {
+    totals: false
 };
 
 export default TableRow;

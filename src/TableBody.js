@@ -9,7 +9,7 @@ class TableBody extends React.Component {
             {this.props.data.map(entry => <TableRow
                 columns={this.props.columns}
                 row={entry}/>)}
-            <TableRow row={this.props.totals} columns={this.props.columns}/>
+            <TableRow row={this.props.totals} columns={this.props.columns} totals={true}/>
             </tbody>
         );
     }

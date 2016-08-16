@@ -10,12 +10,12 @@ BootstrapDataColumn.propTypes = {
     property: React.PropTypes.string.isRequired,
     name: React.PropTypes.string,
     format: React.PropTypes.func,
+    formatTotal: React.PropTypes.func,
     showTotal: React.PropTypes.bool,
     sortable: React.PropTypes.bool
 };
 
 BootstrapDataColumn.defaultProps = {
-    format: (cell, row) => cell,
     showTotal: false,
     sortable: false
 };

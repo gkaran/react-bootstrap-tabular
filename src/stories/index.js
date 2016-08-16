@@ -26,7 +26,8 @@ storiesOf('Button', module)
 const columns = [
     <BootstrapDataColumn
         property='index'
-        name="#"/>,
+        name="#"
+        formatTotal={(cell, row) => <b>Totals</b>}/>,
     <BootstrapDataColumn
         property='name'
         sortable
@@ -37,7 +38,7 @@ const columns = [
     <BootstrapDataColumn
         property='username'
         name="Username"
-        format={(cell, row) => <span>[ {cell} ]</span>}/>,
+        format={(cell, row) => cell ? <span>[ {cell} ]</span>: null}/>,
     <BootstrapDataColumn
         property="money"
         name="Money"
