@@ -34,7 +34,7 @@ class BootstrapDataTable extends React.Component {
     const searchableColumns = this.getFilteredColumnProperties(column => column.includeInSearch);
     let data = this.state.initialData.slice().filter(row => {
       for (const column of searchableColumns) {
-        if (row[column].indexOf(searchTerm) >= 0) {
+        if (`${row[column] || ''}`.indexOf(searchTerm) >= 0) {
           return true;
         }
       }
