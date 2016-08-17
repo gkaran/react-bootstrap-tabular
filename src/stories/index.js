@@ -32,6 +32,8 @@ const columns = [
     name={'Money'}
     sortable
     showTotal
+    format={(cell) => (cell ? `$${cell}` : null)}
+    align={'right'}
   />,
 ];
 const chance = new Chance();

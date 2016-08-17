@@ -14,12 +14,14 @@ BootstrapDataColumn.propTypes = {
   showTotal: React.PropTypes.bool,
   sortable: React.PropTypes.bool,
   includeInSearch: React.PropTypes.bool,
+  align: React.PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 BootstrapDataColumn.defaultProps = {
   showTotal: false,
   sortable: false,
   includeInSearch: false,
+  align: 'left',
 };
 
 export default BootstrapDataColumn;

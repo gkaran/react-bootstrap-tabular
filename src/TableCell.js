@@ -4,7 +4,7 @@ class TableCell extends React.Component {
 
   render() {
     return (
-      <td>
+      <td style={{textAlign: this.props.alignment}}>
         {this.props.format ? this.props.format(this.props.cell, this.props.row) : this.props.cell}
       </td>
     );
@@ -20,6 +20,7 @@ TableCell.propTypes = {
     React.PropTypes.string, React.PropTypes.number
   )).isRequired,
   format: React.PropTypes.func,
+  alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 export default TableCell;

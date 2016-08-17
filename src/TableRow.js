@@ -4,6 +4,7 @@ import TableCell from './TableCell';
 const columnToCell = (column, { row, totals }) => <TableCell
   cell={row[column.property]}
   row={row}
+  alignment={column.align}
   format={totals ? column.formatTotal || column.format : column.format}
 />;
 
