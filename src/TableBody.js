@@ -13,10 +13,11 @@ class TableBody extends React.Component {
   }
 
   render() {
+    const { totals, columns } = this.props;
     return (
       <tbody>
       {this.renderRows()}
-      <TableRow row={this.props.totals} columns={this.props.columns} totals />
+      {totals.length ? <TableRow row={totals} columns={columns} totals /> : null}
       </tbody>
     );
   }
