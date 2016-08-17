@@ -4,7 +4,7 @@ class TableCell extends React.Component {
 
   render() {
     return (
-      <td style={{textAlign: this.props.alignment}}>
+      <td style={{ textAlign: this.props.alignment }}>
         {this.props.format ? this.props.format(this.props.cell, this.props.row) : this.props.cell}
       </td>
     );
