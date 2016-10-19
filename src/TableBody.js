@@ -1,23 +1,36 @@
-import React from "react";
-import TableRow from "./TableRow";
+import React from 'react';
+import TableRow from './TableRow';
 
 class TableBody extends React.Component {
 
-    render() {
-        return (
-            <tbody>
-            {this.props.data.map(entry => <TableRow
-                columns={this.props.columns}
-                row={entry}/>)}
-            <TableRow row={this.props.totals} columns={this.props.columns}/>
-            </tbody>
-        );
-    }
+  renderRows() {
+    return this.props.data.map(entry => (
+      <TableRow
+        columns={this.props.columns}
+        row={entry}
+      />
+    ));
+  }
+
+  render() {
+    const { totals, columns } = this.props;
+    return (
+      <tbody>
+      {this.renderRows()}
+      {totals.length ? <TableRow row={totals} columns={columns} totals /> : null}
+      </tbody>
+    );
+  }
 }
 
 TableBody.propTypes = {
-    data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+  data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  totals: React.PropTypes.arrayOf(React.PropTypes.object),
+};
+
+TableBody.defaultProps = {
+  totals: [],
 };
 
 export default TableBody;
