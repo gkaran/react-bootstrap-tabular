@@ -9,7 +9,8 @@ class SearchEntry extends React.Component {
 
     return (
       <div className="input-group" style={{ width: '250px' }}>
-        <input type="text"
+        <input
+          type="text"
           value={this.props.searchTerm}
           className="form-control"
           placeholder="Search"

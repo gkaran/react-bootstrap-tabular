@@ -7,7 +7,7 @@ class TableHead extends React.Component {
   }
 
   toCell(column) {
-    let content = [column.name];
+    const content = [column.name];
 
     if (column.sortable) {
       let sortIcon = 'glyphicon-sort';
@@ -35,7 +35,7 @@ class TableHead extends React.Component {
   render() {
     return (
       <thead>
-      <tr>{this.getColumns()}</tr>
+        <tr>{this.getColumns()}</tr>
       </thead>
     );
   }

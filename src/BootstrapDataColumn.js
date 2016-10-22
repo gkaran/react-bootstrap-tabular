@@ -1,10 +1,6 @@
 import React from 'react';
 
-class BootstrapDataColumn extends React.Component {
-  render() {
-    return null;
-  }
-}
+const BootstrapDataColumn = () => (null);
 
 BootstrapDataColumn.propTypes = {
   property: React.PropTypes.string.isRequired,

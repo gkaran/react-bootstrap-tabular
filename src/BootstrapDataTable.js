@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
 import PaginationComponent from './PaginationComponent';
@@ -9,6 +8,45 @@ const SORT_ASCENDING = 1;
 const SORT_DESCENDING = -1;
 
 class BootstrapDataTable extends React.Component {
+
+  static sortData(data, column, sortOrder = SORT_ASCENDING) {
+    const sort = (a, b) => {
+      if (a[column.property] > b[column.property]) {
+        return SORT_ASCENDING * sortOrder;
+      }
+      if (a[column.property] < b[column.property]) {
+        return SORT_DESCENDING * sortOrder;
+      }
+      return 0;
+    };
+
+    return data.slice().sort(sort);
+  }
+
+  static computeTotals(data, properties) {
+    return data
+    .map(row => properties
+    .map(property => ({ [property]: row[property] || 0 }))
+    .reduce((a, b) => Object.assign({}, a, b), {}))
+    .reduce((a, b) => properties
+    .map(property => ({ [property]: a[property] + b[property] }))
+    .reduce((c, d) => Object.assign({}, c, d), {}));
+  }
+
+  static splitToPages(data, pageSize, pagination) {
+    const pages = [];
+    if (pagination) {
+      let i = 0;
+      let page = data.slice(i, i + pageSize);
+      while (page.length) {
+        pages.push(page);
+        i += pageSize;
+        page = data.slice(i, i + pageSize);
+      }
+    }
+
+    return pages;
+  }
 
   constructor(props) {
     super(props);
@@ -22,17 +60,18 @@ class BootstrapDataTable extends React.Component {
   }
 
   componentWillMount() {
-    this.initTable(this.props);
+    this.initTable(this.props.data, this.props.pageSize, this.props.pagination,
+      this.props.children);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.initTable(nextProps);
+    this.initTable(nextProps.data, nextProps.pageSize, nextProps.pagination, nextProps.children);
   }
 
   onSearchTermChanged(e) {
     const searchTerm = e.target.value;
     const searchableColumns = this.getFilteredColumnProperties(column => column.includeInSearch);
-    let data = this.state.initialData.slice().filter(row => {
+    let data = this.state.initialData.slice().filter((row) => {
       for (const column of searchableColumns) {
         if (`${row[column] || ''}`.indexOf(searchTerm) >= 0) {
           return true;
@@ -42,21 +81,20 @@ class BootstrapDataTable extends React.Component {
     });
 
     if (this.state.sortColumn) {
-      data = this.sortData(data, this.state.sortColumn, this.state.sortOrder);
+      data = BootstrapDataTable.sortData(data, this.state.sortColumn, this.state.sortOrder);
     }
 
-    const pages = this.splitToPages(data, this.props);
+    const pages = BootstrapDataTable.splitToPages(data, this.props.pageSize, this.props.pagination);
 
     this.setState({ searchTerm, data, pages, currentPage: 0 });
   }
 
   getTable() {
-    const tableClassNames = classnames('table', {
-      'table-striped': this.props.striped,
-      'table-bordered': this.props.bordered,
-      'table-hover': this.props.hover,
-      'table-condensed': this.props.condensed,
-    });
+    const tableClassNames = `table${
+      this.props.striped ? ' table-striped' : ''
+      }${this.props.bordered ? ' table-bordered' : ''
+      }${this.props.hover ? ' table-hover' : ''
+      }${this.props.condensed ? ' table-condensed' : ''}`;
 
     const bodyData = this.props.pagination ?
       this.state.pages[this.state.currentPage] || [] :
@@ -79,54 +117,30 @@ class BootstrapDataTable extends React.Component {
     );
   }
 
-  getFilteredColumnProperties(filterPredicate = () => true, props = this.props) {
-    const columns = React.Children.map(props.children, column => column.props);
+  getFilteredColumnProperties(filterPredicate = () => true, children = this.props.children) {
+    const columns = React.Children.map(children, column => column.props);
     return columns.filter(filterPredicate).map(column => column.property);
-  }
-
-  computeTotals(data, properties) {
-    return data
-      .map(row => properties
-        .map(property => ({ [property]: row[property] || 0 }))
-        .reduce((a, b) => Object.assign({}, a, b), {}))
-      .reduce((a, b) => properties
-        .map(property => ({ [property]: a[property] + b[property] }))
-        .reduce((c, d) => Object.assign({}, c, d), {}));
-  }
-
-  splitToPages(data, { pageSize, pagination }) {
-    const pages = [];
-    if (pagination) {
-      let i = 0;
-      let page = data.slice(i, i + pageSize);
-      while (page.length) {
-        pages.push(page);
-        i += pageSize;
-        page = data.slice(i, i + pageSize);
-      }
-    }
-
-    return pages;
   }
 
   changePage(pageNumber) {
     this.setState({ currentPage: pageNumber });
   }
 
-  initTable(props) {
-    const columns = React.Children.map(props.children, column => column.props);
-    const columnsWithTotals = this.getFilteredColumnProperties(column => column.showTotal, props);
+  initTable(data, pageSize, pagination, children) {
+    const columns = React.Children.map(children, column => column.props);
+    const columnsWithTotals = this.getFilteredColumnProperties(
+      column => column.showTotal, children);
 
-    const data = props.data.slice();
+    const dataCopy = data.slice();
     let totals = [];
 
     if (columnsWithTotals.length) {
-      totals = this.computeTotals(data, columnsWithTotals);
+      totals = BootstrapDataTable.computeTotals(dataCopy, columnsWithTotals);
     }
 
-    const pages = this.splitToPages(data, props);
+    const pages = BootstrapDataTable.splitToPages(dataCopy, pageSize, pagination);
 
-    this.setState({ columns, totals, data, pages, initialData: data });
+    this.setState({ columns, totals, data: dataCopy, pages, initialData: dataCopy });
   }
 
   wrapResponsive(table) {
@@ -148,30 +162,17 @@ class BootstrapDataTable extends React.Component {
       });
     }
 
-    const data = this.sortData(this.state.data, column, updatedState.sortOrder);
-    const pages = this.splitToPages(data, this.props);
+    const data = BootstrapDataTable.sortData(this.state.data, column, updatedState.sortOrder);
+    const pages = BootstrapDataTable.splitToPages(data, this.props.pageSize, this.props.pagination);
 
     this.setState(Object.assign(updatedState, { data, pages }));
-  }
-
-  sortData(data, column, sortOrder = SORT_ASCENDING) {
-    const sort = (a, b) => {
-      if (a[column.property] > b[column.property]) {
-        return SORT_ASCENDING * sortOrder;
-      }
-      if (a[column.property] < b[column.property]) {
-        return SORT_DESCENDING * sortOrder;
-      }
-      return 0;
-    };
-
-    return data.slice().sort(sort);
   }
 
   render() {
     return (
       <div style={{ width: '100%' }}>
-        <SearchEntry visible={this.props.searchable}
+        <SearchEntry
+          visible={this.props.searchable}
           onSearchTermChanged={this.onSearchTermChanged.bind(this)}
           searchTerm={this.state.searchTerm}
         />
@@ -200,6 +201,7 @@ BootstrapDataTable.propTypes = {
   pageSize: React.PropTypes.number,
   maxPages: React.PropTypes.number,
   searchable: React.PropTypes.bool,
+  children: React.PropTypes.node,
 };
 
 BootstrapDataTable.defaultProps = {

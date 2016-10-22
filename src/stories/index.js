@@ -25,14 +25,14 @@ const columns = [
     property={'username'}
     includeInSearch
     name={'Username'}
-    format={(cell) => (cell ? <span>[ {cell} ]</span> : null)}
+    format={cell => (cell ? <span>[ {cell} ]</span> : null)}
   />,
   <BootstrapDataColumn
     property={'money'}
     name={'Money'}
     sortable
     showTotal
-    format={(cell) => (cell ? `$${cell}` : null)}
+    format={cell => (cell ? `$${cell}` : null)}
     align={'right'}
   />,
 ];
