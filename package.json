@@ -25,7 +25,8 @@
     "dist": "webpack lib/index.js dist/react-bootstrap-tabular.js --display-modules --progress && NODE_ENV=production webpack lib/index.js dist/react-bootstrap-tabular.min.js --display-modules --progress",
     "build": "npm run transpile && npm run dist",
     "prepublish": "npm run clean && npm run build",
-    "test": "mocha --compilers js:babel-core/register --colors -w test/*.spec.js",
+    "test:watch": "mocha --compilers js:babel-core/register --colors -w test/*.spec.js",
+    "test": "mocha --compilers js:babel-core/register --colors test/*.spec.js",
     "lint": "eslint src test --ext .js --ext .jsx",
     "lint:fix": "eslint src test --fix --ext .js --ext .jsx"
   },
