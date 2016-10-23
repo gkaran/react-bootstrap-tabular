@@ -71,7 +71,7 @@ const data = [
   {
     id: 1,
     name: 'John',
-    lastname: 'Doe',
+    lastName: 'Doe',
     username: '@john.doe',
     money: 500
   }, ...
@@ -87,14 +87,14 @@ const data = [
     <div class="panel-body">
       <div id="example#1"></div>
     </div>
-    <div class="panel-footer" id="simple-view-code" hidden>
+    <div class="panel-footer" hidden>
       <pre>
         <code class="html">
-&lt;BootstrapDataTable data={data}&gt;
-  &lt;BootstrapDataColumn property={'index'} name={'#'} /&gt;,
-  &lt;BootstrapDataColumn property={'name'} name={'Name'} /&gt;,
-  &lt;BootstrapDataColumn property={'lastName'} name={'Last Name'} /&gt;,
-  &lt;BootstrapDataColumn property={'username'} name={'Username'} /&gt;,
+&lt;BootstrapDataTable data={data} &gt;
+  &lt;BootstrapDataColumn property={'index'} name={'#'} /&gt;
+  &lt;BootstrapDataColumn property={'name'} name={'Name'} /&gt;
+  &lt;BootstrapDataColumn property={'lastName'} name={'Last Name'} /&gt;
+  &lt;BootstrapDataColumn property={'username'} name={'Username'} /&gt;
   &lt;BootstrapDataColumn property={'money'} name={'Money'} /&gt;
 &lt;/BootstrapDataTable&gt;
         </code>
@@ -102,21 +102,35 @@ const data = [
     </div>
   </div>
   <div class="toggle-code-wrapper">
-    <button
-      id="simple-view-code-toggle"
-      class='toggle-code'
-      role="button"
-      onclick="javascript:toggleCode('#simple-view-code')">Show Code</button>
+    <button class='toggle-code' role="button">Show Code</button>
   </div>
-
-
 
 
   <h2>Bordered view</h2>
 
   <p>Adding a border makes it prettier, doesn't it?</p>
 
-  <div id="example#2"></div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div id="example#2"></div>
+    </div>
+    <div class="panel-footer" hidden>
+      <pre>
+        <code class="html">
+&lt;BootstrapDataTable data={data} bordered &gt;
+  &lt;BootstrapDataColumn property={'index'} name={'#'} /&gt;
+  &lt;BootstrapDataColumn property={'name'} name={'Name'} /&gt;
+  &lt;BootstrapDataColumn property={'lastName'} name={'Last Name'} /&gt;
+  &lt;BootstrapDataColumn property={'username'} name={'Username'} /&gt;
+  &lt;BootstrapDataColumn property={'money'} name={'Money'} /&gt;
+&lt;/BootstrapDataTable&gt;
+        </code>
+      </pre>
+    </div>
+  </div>
+  <div class="toggle-code-wrapper">
+    <button class='toggle-code' role="button">Show Code</button>
+  </div>
 
   <script src="../dist/react-bootstrap-tabular.js"></script>
   <script type="text/babel" src="js/docs.js"></script>

@@ -2,7 +2,7 @@ const {BootstrapDataTable, BootstrapDataColumn} = ReactBootstrapTabular;
 const chance = new Chance(31102015);
 const columns = [
   <BootstrapDataColumn
-    property={'index'}
+    property={'id'}
     name={'#'}
     formatTotal={() => <b>Totals</b>}
   />,
@@ -34,7 +34,7 @@ const columns = [
 ];
 
 const genData = (rows = 10) => Array.from({length: rows}, (v, k) => ({
-  index: k,
+  id: k + 1,
   name: chance.first(),
   lastName: chance.last(),
   username: chance.twitter(),
@@ -42,13 +42,13 @@ const genData = (rows = 10) => Array.from({length: rows}, (v, k) => ({
 }));
 
 const DefaultView = () => (
-  <BootstrapDataTable data={genData()}>
+  <BootstrapDataTable data={genData(4)}>
     {columns}
   </BootstrapDataTable>
 );
 
 const BorderedView = () => (
-  <BootstrapDataTable data={genData()} bordered>
+  <BootstrapDataTable data={genData(4)} bordered>
     {columns}
   </BootstrapDataTable>
 );
