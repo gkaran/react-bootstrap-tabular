@@ -851,14 +851,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var content = [column.name];
 
 	      if (column.sortable) {
-	        var sortIcon = 'glyphicon-sort';
+	        var sortIcon = '▲/▼';
 	        if (this.props.sortColumn && this.props.sortColumn === column) {
-	          sortIcon = 'glyphicon-sort-by-attributes';
+	          sortIcon = '▼';
 	          if (this.props.sortOrder < 0) {
-	            sortIcon += '-alt';
+	            sortIcon += '▲';
 	          }
 	        }
-	        content.push(_react2.default.createElement('span', { style: { marginLeft: 2 }, className: 'glyphicon ' + sortIcon, 'aria-hidden': 'true' }));
+	        content.push(_react2.default.createElement(
+	          'span',
+	          { style: { marginLeft: 2 } },
+	          sortIcon
+	        ));
 	      }
 	      return _react2.default.createElement(
 	        'th',
@@ -940,7 +944,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var totals = _ref.totals;
 	  return _react2.default.createElement(
 	    'tr',
-	    null,
+	    { key: row },
 	    columns.map(function (c) {
 	      return columnToCell(c, row, totals);
 	    })
