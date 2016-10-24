@@ -9,7 +9,7 @@ const columnToCell = (column, row, totals) => <TableCell
 />;
 
 const TableRow = ({ columns, row, totals }) => (
-  <tr>{columns.map(c => columnToCell(c, row, totals))}</tr>
+  <tr key={row}>{columns.map(c => columnToCell(c, row, totals))}</tr>
 );
 
 TableRow.propTypes = {

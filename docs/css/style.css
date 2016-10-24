@@ -18,3 +18,11 @@ pre {
     top: -22px;
     text-align: right;
 }
+
+.block-title {
+    padding-right: 0;
+}
+
+.block-title > p {
+    border-bottom: 1px solid #cccccc;
+}
