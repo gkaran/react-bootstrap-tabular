@@ -8,7 +8,7 @@ class SearchEntry extends React.Component {
     }
 
     return (
-      <div className="input-group" style={{ width: '250px' }}>
+      <div className="input-group" style={{ width: '250px', 'margin-bottom': '12px' }}>
         <input type="text"
           value={this.props.searchTerm}
           className="form-control"
