@@ -481,11 +481,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var tiles = [];
 	      var currentPage = this.props.currentPage;
 
-	      var _getLeftAndRightNumbe = this.getLeftAndRightNumberOfPages(currentPage);
-
-	      var left = _getLeftAndRightNumbe.left;
-	      var right = _getLeftAndRightNumbe.right;
-
+	      var _getLeftAndRightNumbe = this.getLeftAndRightNumberOfPages(currentPage),
+	          left = _getLeftAndRightNumbe.left,
+	          right = _getLeftAndRightNumbe.right;
 
 	      if (currentPage > 0) {
 	        tiles.push(this.getPageTile(0, '⏪'));
@@ -719,15 +717,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var totals = _props.totals;
-	      var columns = _props.columns;
+	      var _props = this.props,
+	          totals = _props.totals,
+	          columns = _props.columns;
 
 	      return _react2.default.createElement(
 	        'tbody',
 	        null,
 	        this.renderRows(),
-	        totals.length ? _react2.default.createElement(_TableRow2.default, { row: totals, columns: columns, totals: true }) : null
+	        Object.keys(totals).length ? _react2.default.createElement(_TableRow2.default, { row: totals, columns: columns, totals: true }) : null
 	      );
 	    }
 	  }]);
@@ -738,7 +736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	TableBody.propTypes = {
 	  data: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
 	  columns: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
-	  totals: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object)
+	  totals: _react2.default.PropTypes.object
 	};
 
 	TableBody.defaultProps = {
@@ -939,9 +937,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var TableRow = function TableRow(_ref) {
-	  var columns = _ref.columns;
-	  var row = _ref.row;
-	  var totals = _ref.totals;
+	  var columns = _ref.columns,
+	      row = _ref.row,
+	      totals = _ref.totals;
 	  return _react2.default.createElement(
 	    'tr',
 	    { key: row },

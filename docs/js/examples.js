@@ -1,12 +1,12 @@
-const {BootstrapDataTable, BootstrapDataColumn} = ReactBootstrapTabular;
+const { BootstrapDataTable, BootstrapDataColumn } = ReactBootstrapTabular;
 const chance = new Chance(31102015);
 
-const genDataR = (rows = 10) => Array.from({length: rows}, (v, k) => ({
+const genDataR = (rows = 10) => Array.from({ length: rows }, (v, k) => ({
   id: k + 1,
   name: chance.first(),
   lastName: chance.last(),
   username: chance.twitter(),
-  money: chance.integer({min: 5, max: 10000}),
+  money: chance.integer({ min: 5, max: 10000 }),
 }));
 
 const genData = _.memoize(genDataR);
@@ -15,21 +15,21 @@ const doHighLight = () => $('pre code').each((i, block) => hljs.highlightBlock(b
 
 class CodeDescriptor extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this._getTableProps = this._getTableProps.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount () {
     doHighLight();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     doHighLight();
   }
 
-  _getTableProps() {
+  _getTableProps () {
     let props = '';
     const condAdd = (cond, v) => cond ? ` ${v}` : '';
 
@@ -48,7 +48,7 @@ class CodeDescriptor extends React.Component {
     return props;
   }
 
-  _getColumnProps(property, name, p) {
+  _getColumnProps (property, name, p) {
     const condAdd = (cond, v) => cond ? ` ${v}` : '';
     let props = `property={'${property}'} name={'${name}'}`;
 
@@ -59,7 +59,7 @@ class CodeDescriptor extends React.Component {
     return props;
   }
 
-  render() {
+  render () {
     return (
       <pre>
         <code className="html">
@@ -90,19 +90,19 @@ CodeDescriptor.propTypes = {
 
 class CheckBox extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this._onClick = this._onClick.bind(this);
   }
 
-  _onClick() {
+  _onClick () {
     this.props.onClick(this.props.property);
   }
 
-  render() {
+  render () {
     return (
       <label className="checkbox-inline">
-        <input type="checkbox" value={this.props.value} onClick={this._onClick}/> {this.props.label}
+        <input type="checkbox" value={this.props.value} onClick={this._onClick} /> {this.props.label}
       </label>
     );
   }
@@ -117,31 +117,28 @@ CheckBox.propTypes = {
 
 class ColumnPropertySelector extends React.Component {
 
-  render() {
+  render () {
     return (
-      <div>
-        <div className="col-xs-12 block-title">
+      <div className="col-xs-12 column-block">
+        <div className="block-title no-margin">
           <p>{this.props.label} column</p>
         </div>
 
         <form className="form-horizontal">
-          <div className="col-xs-12">
-            <CheckBox value={this.props.values.sortable}
+          <CheckBox value={this.props.values.sortable}
+                    onClick={this.props.toggleProperty}
+                    label="sortable"
+                    property={`${this.props.path}.sortable`} />
+          <CheckBox value={this.props.values.includeInSearch}
+                    onClick={this.props.toggleProperty}
+                    label="includeInSearch"
+                    property={`${this.props.path}.includeInSearch`} />
+          {this.props.values.showTotal !== undefined && (
+            <CheckBox value={this.props.values.showTotal}
                       onClick={this.props.toggleProperty}
-                      label="sortable"
-                      property={`${this.props.path}.sortable`}/>
-            <CheckBox value={this.props.values.includeInSearch}
-                      onClick={this.props.toggleProperty}
-                      label="includeInSearch"
-                      property={`${this.props.path}.includeInSearch`}/>
-            {this.props.values.showTotal !== undefined && (
-              <CheckBox value={this.props.values.showTotal}
-                        onClick={this.props.toggleProperty}
-                        label="showTotal"
-                        property={`${this.props.path}.showTotal`}/>
-            )}
-          </div>
-
+                      label="showTotal"
+                      property={`${this.props.path}.showTotal`} />
+          )}
         </form>
       </div>
     );
@@ -160,7 +157,7 @@ ColumnPropertySelector.propTypes = {
 
 class TestComponent extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -176,8 +173,7 @@ class TestComponent extends React.Component {
       columns: {
         id: {
           includeInSearch: false,
-          sortable: false,
-          showTotal: false
+          sortable: false
         },
         name: {
           includeInSearch: false,
@@ -204,23 +200,23 @@ class TestComponent extends React.Component {
     this._toggleProperty = this._toggleProperty.bind(this);
   }
 
-  _dataSizeChanged(e) {
-    this.setState({dataSize: Number(e.target.value)})
+  _dataSizeChanged (e) {
+    this.setState({ dataSize: Number(e.target.value) })
   }
 
-  _pageSizeChanged(e) {
-    this.setState({pageSize: Number(e.target.value)});
+  _pageSizeChanged (e) {
+    this.setState({ pageSize: Number(e.target.value) });
   }
 
-  _toggleProperty(property) {
+  _toggleProperty (property) {
     const path = property.split('.');
     const currentValue = path.reduce((p, c) => p[c], this.state);
     path.push(!currentValue);
-    const newValue = path.reduceRight((p, c) => ({[c]: p}));
+    const newValue = path.reduceRight((p, c) => ({ [c]: p }));
     this.setState(_.merge({}, this.state, newValue));
   }
 
-  render() {
+  render () {
     return (
       <div className="row">
         <div className="col-xs-12">
@@ -249,7 +245,7 @@ class TestComponent extends React.Component {
                             className="form-control"
                             id="data-size"
                             onChange={this._dataSizeChanged}
-                            value={this.state.dataSize}/>
+                            value={this.state.dataSize} />
                         </div>
                       </div>
 
@@ -261,7 +257,7 @@ class TestComponent extends React.Component {
                             className="form-control"
                             id="data-size"
                             onChange={this._pageSizeChanged}
-                            value={this.state.pageSize}/>
+                            value={this.state.pageSize} />
                         </div>
                       </div>
 
@@ -269,31 +265,31 @@ class TestComponent extends React.Component {
                         <div className="row">
                           <div className="col-xs-6">
                             <CheckBox value={this.state.bordered} onClick={this._toggleProperty} label="bordered"
-                                      property="bordered"/>
+                                      property="bordered" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.condensed} onClick={this._toggleProperty} label="condensed"
-                                      property="condensed"/>
+                                      property="condensed" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.striped} onClick={this._toggleProperty} label="striped"
-                                      property="striped"/>
+                                      property="striped" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.hover} onClick={this._toggleProperty} label="hover"
-                                      property="hover"/>
+                                      property="hover" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.responsive} onClick={this._toggleProperty} label="responsive"
-                                      property="responsive"/>
+                                      property="responsive" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.pagination} onClick={this._toggleProperty} label="pagination"
-                                      property="pagination"/>
+                                      property="pagination" />
                           </div>
                           <div className="col-xs-6">
                             <CheckBox value={this.state.searchable} onClick={this._toggleProperty} label="searchable"
-                                      property="searchable"/>
+                                      property="searchable" />
                           </div>
                         </div>
                       </div>
@@ -308,19 +304,19 @@ class TestComponent extends React.Component {
               <div className="row">
 
                 <ColumnPropertySelector label='Id' toggleProperty={this._toggleProperty}
-                                        path='columns.id' values={this.state.columns.id}/>
+                                        path='columns.id' values={this.state.columns.id} />
 
                 <ColumnPropertySelector label='Name' toggleProperty={this._toggleProperty}
-                                        path='columns.name' values={this.state.columns.name}/>
+                                        path='columns.name' values={this.state.columns.name} />
 
                 <ColumnPropertySelector label='Last Name' toggleProperty={this._toggleProperty}
-                                        path='columns.lastName' values={this.state.columns.lastName}/>
+                                        path='columns.lastName' values={this.state.columns.lastName} />
 
                 <ColumnPropertySelector label='Username' toggleProperty={this._toggleProperty}
-                                        path='columns.username' values={this.state.columns.username}/>
+                                        path='columns.username' values={this.state.columns.username} />
 
                 <ColumnPropertySelector label='Money' toggleProperty={this._toggleProperty}
-                                        path='columns.money' values={this.state.columns.money}/>
+                                        path='columns.money' values={this.state.columns.money} />
 
               </div>
             </div>
@@ -348,35 +344,35 @@ class TestComponent extends React.Component {
                   includeInSearch={this.state.columns.id.includeInSearch}
                   formatTotal={() => <b>Total:</b>}
                   showTotal={this.state.columns.id.showTotal}
-                  sortable={this.state.columns.id.sortable}/>
+                  sortable={this.state.columns.id.sortable} />
                 <BootstrapDataColumn
                   property={'name'}
                   name={'Name'}
                   includeInSearch={this.state.columns.name.includeInSearch}
-                  sortable={this.state.columns.name.sortable}/>
+                  sortable={this.state.columns.name.sortable} />
                 <BootstrapDataColumn
                   property={'lastName'}
                   name={'Last Name'}
                   includeInSearch={this.state.columns.lastName.includeInSearch}
-                  sortable={this.state.columns.lastName.sortable}/>
+                  sortable={this.state.columns.lastName.sortable} />
                 <BootstrapDataColumn
                   property={'username'}
                   name={'Username'}
                   includeInSearch={this.state.columns.username.includeInSearch}
-                  sortable={this.state.columns.username.sortable}/>
+                  sortable={this.state.columns.username.sortable} />
                 <BootstrapDataColumn
                   property={'money'}
                   name={'Money'}
                   includeInSearch={this.state.columns.money.includeInSearch}
                   showTotal={this.state.columns.money.showTotal}
-                  sortable={this.state.columns.money.sortable}/>
+                  sortable={this.state.columns.money.sortable} />
               </BootstrapDataTable>
             </div>
           </div>
 
           <div className="row">
             <div className="col-xs-12">
-              <h3>Rendered Code</h3>
+              <h3>Code</h3>
               <CodeDescriptor {...this.state} />
             </div>
           </div>

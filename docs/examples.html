@@ -3,32 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>React Bootstrap Tabular - Examples</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap -->
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" c
-        rossorigin="anonymous">
-  <link rel="stylesheet" href="css/bootstrap-yeti.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-          crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-yeti.min.css">
+  <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- React -->
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
 
   <!-- Various -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
-  <script src="http://chancejs.com/chance.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+  <script src="//chancejs.com/chance.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/base.js"></script>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
 
@@ -42,14 +37,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">React Bootstrap Datatable</a>
+      <a class="navbar-brand" href="./index.html">React Bootstrap Tabular</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/">Getting started</a></li>
-        <li><a href="/docs.html">Docs</a></li>
-        <li><a href="/examples.html">Examples</a></li>
+        <li><a href="./started.html">Getting started</a></li>
+        <li><a href="./docs.html">Docs</a></li>
+        <li><a href="./examples.html">Examples</a></li>
       </ul>
     </div>
 
@@ -58,83 +53,28 @@
 
 <div class="container">
 
-  <h1>Examples</h1>
+  <h2>Example page</h2>
 
-  <p>Time for some usage examples now, isn't it? For simplicity reasons lets suppose
-    that we have a predefined data set with a user data base containing username, name,
-    lastname and the money included in the user's account.
-  </p>
+  <p>We decided to provide an interactive example for the component, since it will be easier to visualize. Choose the options you want from the customization
+  form and you will see the result in the rendered view. In the code section you can also see the code that produces that outcome.</p>
 
-  <pre>
-    <code class="js">
-const data = [
-  {
-    id: 1,
-    name: 'John',
-    lastName: 'Doe',
-    username: '@john.doe',
-    money: 500
-  }, ...
-];
-    </code>
-  </pre>
-
-  <h2>Simple view</h2>
-
-  <p>Lets begin with a simple view of the base table without any additional options.</p>
-
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div id="example#1"></div>
-    </div>
-    <div class="panel-footer" hidden>
-      <pre>
-        <code class="html">
-&lt;BootstrapDataTable data={data} &gt;
-  &lt;BootstrapDataColumn property={'index'} name={'#'} /&gt;
-  &lt;BootstrapDataColumn property={'name'} name={'Name'} /&gt;
-  &lt;BootstrapDataColumn property={'lastName'} name={'Last Name'} /&gt;
-  &lt;BootstrapDataColumn property={'username'} name={'Username'} /&gt;
-  &lt;BootstrapDataColumn property={'money'} name={'Money'} /&gt;
-&lt;/BootstrapDataTable&gt;
-        </code>
-      </pre>
-    </div>
-  </div>
-  <div class="toggle-code-wrapper">
-    <button class='toggle-code' role="button">Show Code</button>
-  </div>
-
-
-  <h2>Bordered view</h2>
-
-  <p>Adding a border makes it prettier, doesn't it?</p>
-
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div id="example#2"></div>
-    </div>
-    <div class="panel-footer" hidden>
-      <pre>
-        <code class="html">
-&lt;BootstrapDataTable data={data} bordered &gt;
-  &lt;BootstrapDataColumn property={'index'} name={'#'} /&gt;
-  &lt;BootstrapDataColumn property={'name'} name={'Name'} /&gt;
-  &lt;BootstrapDataColumn property={'lastName'} name={'Last Name'} /&gt;
-  &lt;BootstrapDataColumn property={'username'} name={'Username'} /&gt;
-  &lt;BootstrapDataColumn property={'money'} name={'Money'} /&gt;
-&lt;/BootstrapDataTable&gt;
-        </code>
-      </pre>
-    </div>
-  </div>
-  <div class="toggle-code-wrapper">
-    <button class='toggle-code' role="button">Show Code</button>
-  </div>
-
-  <script src="../dist/react-bootstrap-tabular.js"></script>
-  <script type="text/babel" src="js/docs.js"></script>
+  <div id="example"></div>
 </div>
+
+<footer class='footer'>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <p><a href="https://github.com/gkaran/react-bootstrap-tabular" title="react bootstrap tabular">react-bootstrap-tabular</a>
+          was created with <span class='glyphicon glyphicon-heart heart' aria-hidden="true"></span> from
+          <a href='https://github.com/gkaran' title='gkaran'>gkaran</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../dist/react-bootstrap-tabular.js"></script>
+<script type="text/babel" src="./js/examples.js"></script>
 
 </body>
 </html>

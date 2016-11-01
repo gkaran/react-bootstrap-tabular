@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Bootstrap Tabular - Getting Started</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-yeti.min.css">
+  <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Various -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<section>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./index.html">React Bootstrap Tabular</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="./started.html">Getting started</a></li>
+          <li><a href="./docs.html">Docs</a></li>
+          <li><a href="./examples.html">Examples</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Getting Started</h2>
+        <p>Lets start by adding the dependency to your project:</p>
+
+        <pre>
+          <code class="bash">
+npm install --save react-bootstrap-tabular # for classic npm
+yarn add react-bootstrap-tabular # for the yarn users
+          </code>
+        </pre>
+
+        <p>Now that we have that settled we need to import and use the components. Let's provide a small example:</p>
+
+        <pre>
+          <code class='js'>
+import React from 'react';
+import { BootstrapDataTable, BootstrapDataColumn } from 'react-bootstrap-tabular';
+
+export default class TestComponent extends React.Component {
+
+  render () {
+    const data = [
+      { name: 'George', country: 'Greece' },
+      { name: 'John', country: 'Italy' },
+      { name: 'Mary', country: 'China' }
+    ];
+
+    return (
+      &lt;BootstrapDataTable data={data}&gt;
+        &lt;BoostrapDataColumn property='name' label='Name' /&gt;
+        &lt;BoostrapDataColumn property='country' label='Country' /&gt;
+      &lt;/BootstrapDataTable&gt;
+    );
+  }
+}
+          </code>
+        </pre>
+
+        <p>This will render the following:</p>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Country</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>George</td>
+            <td>Greece</td>
+          </tr>
+          <tr>
+            <td>John</td>
+            <td>Italy</td>
+          </tr>
+          <tr>
+            <td>Mary</td>
+            <td>China</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <p>Like what you see? Move on to <a href="./examples.html" title='examples'>examples</a> or
+          <a href="./docs.html" title='docs'>docs</a> to find out more!</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <footer class='footer'>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <p><a href="https://github.com/gkaran/react-bootstrap-tabular" title="react bootstrap tabular">react-bootstrap-tabular</a>
+            was created with <span class='glyphicon glyphicon-heart heart' aria-hidden="true"></span> from
+            <a href='https://github.com/gkaran' title='gkaran'>gkaran</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>
