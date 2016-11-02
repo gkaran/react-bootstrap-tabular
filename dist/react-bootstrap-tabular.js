@@ -635,7 +635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'input-group', style: { width: '250px' } },
+	        { className: 'input-group', style: { width: '250px', 'margin-bottom': '12px' } },
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          value: this.props.searchTerm,
