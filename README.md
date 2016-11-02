@@ -1,14 +1,22 @@
-# React Bootstrap Tabular Component
+# React Bootstrap Tabular
 
-React Bootstrap Tabular Component
+<center>
 
-[![NPM version][npm-badge]][npm] [![Build Status][travis-ci-image]][travis-ci-url]
-
+[![NPM version][npm-badge]][npm] 
+[![Build Status][travis-ci-image]][travis-ci-url]
 [![Dependency Status][deps-badge]][deps]
 [![devDependencies Status][dev-deps-badge]][dev-deps]
 [![peerDependencies Status][peer-deps-badge]][peer-deps]
 
-## This is a work in progress. Documentation and many enahncements will follow in the next days. Stay tunned!
+</center>
+
+Do you like react? Do you like bootstrap? Do you like tables? Well guess what, we got you covered!!!
+
+React bootstrap tabular came to life in order to help combine all the above together into an awesome
+experience. Display your table table data with ease, include filtering, pagination and more great features.
+
+To learn more please refer to our [official documentation](https://gkaran.github.io/react-bootstrap-tabular/).
+Have fun with tables!
 
 
 [npm-badge]: http://badge.fury.io/js/react-bootstrap-tabular.svg
