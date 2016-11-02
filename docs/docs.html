@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Bootstrap Tabular - Docs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-yeti.min.css">
+  <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Various -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<section>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./index.html">React Bootstrap Tabular</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="./started.html">Getting started</a></li>
+          <li><a href="./docs.html">Docs</a></li>
+          <li><a href="./examples.html">Examples</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Docs</h2>
+        <p>Here we provide a list with all the properties that can be passed to our components, their type and default values.</p>
+
+        <section title="Bootstrap data table">
+
+          <h3>BootstrapDataTable</h3>
+
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Property</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Default value</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>data</td>
+              <td>true</td>
+              <td>array of plain js objects</td>
+              <td></td>
+              <td>The data that will be rendered in the table</td>
+            </tr>
+
+            <tr>
+              <td>bordered</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the <span class="css-class">.table-bordered</span> class will be applied to the table</td>
+            </tr>
+
+            <tr>
+              <td>striped</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the <span class='css-class'>.table-striped</span> class will be applied to the table</td>
+            </tr>
+
+            <tr>
+              <td>responsive</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the table will be responsive with respect to bootstrap implenetation</td>
+            </tr>
+
+            <tr>
+              <td>hover</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the <span class="css-class">.table-hover</span> class will be applied to the table</td>
+            </tr>
+
+            <tr>
+              <td>condensed</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the <span class="css-class">.table-condensed</span> class will be applied to the table</td>
+            </tr>
+
+            <tr>
+              <td>pagination</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the table should include pagination. If set to true the table data will be split to pages and a pagination component will be shown
+                  that will allow moving between pages.
+              </td>
+            </tr>
+
+            <tr>
+              <td>pageSize</td>
+              <td>false</td>
+              <td>number</td>
+              <td>10</td>
+              <td>The amount of entries that each page hold when pagination is active.</td>
+            </tr>
+
+            <tr>
+              <td>maxPages</td>
+              <td>false</td>
+              <td>number</td>
+              <td>5</td>
+              <td>The number of pages that will be visible in the pagination component.</td>
+            </tr>
+
+            <tr>
+              <td>searchable</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the table data should be searchable. If enabled a search box will be shown that will allow filtering data and showing only
+                  matching records.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section title="Bootstrap data column">
+          <h3>BootstrapDataColumn</h3>
+
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Property</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Default value</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>property</td>
+              <td>true</td>
+              <td>string</td>
+              <td></td>
+              <td>The property from the provided objects in table data that should be used to render this column.</td>
+            </tr>
+
+            <tr>
+              <td>name</td>
+              <td>false</td>
+              <td>string</td>
+              <td></td>
+              <td>The label of the column. It will be displayed in the table head if provided.</td>
+            </tr>
+
+            <tr>
+              <td>format</td>
+              <td>false</td>
+              <td>function(cell, row)</td>
+              <td></td>
+              <td>The function that given as inputs the cell and row data should return the formatted value as it should be displayed in the table cell.</td>
+            </tr>
+
+            <tr>
+              <td>formatTotal</td>
+              <td>false</td>
+              <td>function(cell, row)</td>
+              <td></td>
+              <td>The function that given as inputs the cell and row data should return the format that the total will be displayed in the table for the given
+                  column.
+              </td>
+            </tr>
+
+            <tr>
+              <td>showTotal</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether the total for the given column should be shown or not.</td>
+            </tr>
+
+            <tr>
+              <td>sortable</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether this column allows sorting or not.</td>
+            </tr>
+
+            <tr>
+              <td>includeInSearch</td>
+              <td>false</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>Whether this column should participate in the filtering being performed when saerch is enabled for the table data.</td>
+            </tr>
+
+            <tr>
+              <td>align</td>
+              <td>false</td>
+              <td>string (allowed: left, center, right)</td>
+              <td>left</td>
+              <td>Define the alignment for the column.</td>
+            </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <footer class='footer'>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <p><a href="https://github.com/gkaran/react-bootstrap-tabular" title="react bootstrap tabular">react-bootstrap-tabular</a>
+            was created with <span class='glyphicon glyphicon-heart heart' aria-hidden="true"></span> from
+            <a href='https://github.com/gkaran' title='gkaran'>gkaran</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>

@@ -13,7 +13,7 @@ class PaginationComponent extends React.Component {
     }
 
     for (let i = left; i > 0; i--) {
-      tiles.push(this.getPageTile(currentPage - i, currentPage - i + 1));
+      tiles.push(this.getPageTile(currentPage - i, (currentPage - i) + 1));
     }
 
     tiles.push(this.getPageTile(currentPage, currentPage + 1, true));
@@ -32,9 +32,9 @@ class PaginationComponent extends React.Component {
 
   getPageTile(page, text, active = false) {
     return (
-            <li className={active ? 'active' : ''} key={`${page}-${text}`}>
-                <a href="#" onClick={e => this.changePage(e, page)}>{text}</a>
-            </li>
+      <li className={active ? 'active' : ''} key={`${page}-${text}`}>
+        <a href={undefined} onClick={e => this.changePage(e, page)}>{text}</a>
+      </li>
         );
   }
 
@@ -45,7 +45,7 @@ class PaginationComponent extends React.Component {
     let left = visibleNumberOfPages === 2 ? 0 : Math.floor(visibleNumberOfPages / 2.0);
     let right = visibleNumberOfPages - left;
     if (left % 2 === 0) {
-      right--;
+      right -= 1;
     }
 
     if (currentPage - left < 0) {
@@ -55,8 +55,8 @@ class PaginationComponent extends React.Component {
     }
 
     while (currentPage + right >= this.props.pages) {
-      left++;
-      right--;
+      left += 1;
+      right -= 1;
     }
 
     return { left, right };

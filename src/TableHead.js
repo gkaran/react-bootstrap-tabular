@@ -7,18 +7,18 @@ class TableHead extends React.Component {
   }
 
   toCell(column) {
-    let content = [column.name];
+    const content = [column.name];
 
     if (column.sortable) {
-      let sortIcon = 'glyphicon-sort';
+      let sortIcon = '▲/▼';
       if (this.props.sortColumn && this.props.sortColumn === column) {
-        sortIcon = 'glyphicon-sort-by-attributes';
+        sortIcon = '▼';
         if (this.props.sortOrder < 0) {
-          sortIcon += '-alt';
+          sortIcon += '▲';
         }
       }
       content.push(
-        <span style={{ marginLeft: 2 }} className={`glyphicon ${sortIcon}`} aria-hidden="true" />
+        <span style={{ marginLeft: 2 }}>{sortIcon}</span>
       );
     }
     return <th onClick={e => this.handleOnClick(e, column)}>{content}</th>;
@@ -35,7 +35,7 @@ class TableHead extends React.Component {
   render() {
     return (
       <thead>
-      <tr>{this.getColumns()}</tr>
+        <tr>{this.getColumns()}</tr>
       </thead>
     );
   }

@@ -16,8 +16,8 @@ class TableBody extends React.Component {
     const { totals, columns } = this.props;
     return (
       <tbody>
-      {this.renderRows()}
-      {totals.length ? <TableRow row={totals} columns={columns} totals /> : null}
+        {this.renderRows()}
+        {Object.keys(totals).length ? <TableRow row={totals} columns={columns} totals /> : null}
       </tbody>
     );
   }
@@ -26,7 +26,7 @@ class TableBody extends React.Component {
 TableBody.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  totals: React.PropTypes.arrayOf(React.PropTypes.object),
+  totals: React.PropTypes.object,
 };
 
 TableBody.defaultProps = {
