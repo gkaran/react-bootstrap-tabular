@@ -28,7 +28,8 @@
     "test:watch": "mocha --compilers js:babel-core/register --colors -w test/*.spec.js",
     "test": "mocha --compilers js:babel-core/register --colors test/*.spec.js",
     "lint": "eslint src test --ext .js --ext .jsx",
-    "lint:fix": "eslint src test --fix --ext .js --ext .jsx"
+    "lint:fix": "eslint src test --fix --ext .js --ext .jsx",
+    "precommit": "lint"
   },
   "main": "lib/index.js",
   "peerDependencies": {
