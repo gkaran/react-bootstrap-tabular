@@ -26,11 +26,11 @@ class TableBody extends React.Component {
 TableBody.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  totals: React.PropTypes.object,
+  totals: React.PropTypes.object
 };
 
 TableBody.defaultProps = {
-  totals: [],
+  totals: {}
 };
 
 export default TableBody;

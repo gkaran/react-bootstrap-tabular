@@ -1,41 +1,22 @@
 import React from 'react';
+import Th from './Th';
 
 class TableHead extends React.Component {
-
-  getColumns() {
-    return this.props.columns.map(this.toCell.bind(this));
-  }
-
-  toCell(column) {
-    const content = [column.name];
-
-    if (column.sortable) {
-      let sortIcon = '▲/▼';
-      if (this.props.sortColumn && this.props.sortColumn === column) {
-        sortIcon = '▼';
-        if (this.props.sortOrder < 0) {
-          sortIcon += '▲';
-        }
-      }
-      content.push(
-        <span style={{ marginLeft: 2 }}>{sortIcon}</span>
-      );
-    }
-    return <th onClick={e => this.handleOnClick(e, column)}>{content}</th>;
-  }
-
-  handleOnClick(event, column) {
-    event.preventDefault();
-
-    if (column.sortable) {
-      this.props.sortBy(column);
-    }
-  }
 
   render() {
     return (
       <thead>
-        <tr>{this.getColumns()}</tr>
+        <tr>
+          {this.props.columns.map(column => (
+            <Th
+              column={column}
+              key={column.uid}
+              sortColumn={this.props.sortColumn}
+              sortOrder={this.props.sortOrder}
+              sortBy={this.props.sortBy}
+            />
+          ))}
+        </tr>
       </thead>
     );
   }
