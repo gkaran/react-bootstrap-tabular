@@ -26,8 +26,9 @@
     "build": "npm run transpile && npm run dist && npm run docs:update-lib",
     "prepublish": "npm run clean && npm run build",
     "docs:update-lib": "cpx dist/*.min.js docs/js",
-    "test:watch": "mocha --compilers js:babel-core/register --colors -w test/*.spec.js",
-    "test": "mocha --compilers js:babel-core/register --colors test/*.spec.js",
+    "test": "mocha --compilers js:babel-core/register --colors --recursive test",
+    "test:watch": "mocha --compilers js:babel-core/register --colors -w --recursive test",
+    "test:coverage": "babel-node ./node_modules/.bin/isparta cover --include-all-sources _mocha -- --recursive test",
     "lint": "eslint src test --ext .js --ext .jsx",
     "lint:fix": "eslint src test --fix --ext .js --ext .jsx",
     "precommit": "lint"
@@ -56,6 +57,8 @@
     "eslint-plugin-import": "2.0.1",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.5.0",
+    "isparta": "^4.0.0",
+    "istanbul": "^0.4.5",
     "jsdom": "9.8.3",
     "mocha": "3.1.2",
     "react": "^0.14.0 || ^15.0.0",
@@ -64,5 +67,8 @@
     "rimraf": "2.5.4",
     "sinon": "1.17.6",
     "webpack": "1.13.3"
+  },
+  "dependencies": {
+    "react-addons-update": "^15.3.2"
   }
 }

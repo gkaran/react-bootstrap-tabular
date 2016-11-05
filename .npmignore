@@ -1,6 +1,7 @@
 src
 test
 dist
+coverage
 .babelrc
 .gitignore
 .npmignore
