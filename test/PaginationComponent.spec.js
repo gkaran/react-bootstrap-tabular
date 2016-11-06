@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
@@ -7,7 +8,7 @@ import PaginationComponent from '../src/PaginationComponent';
 const { describe, it } = global;
 
 const getWrapper = ({
-  pagination = true, pages = 10, currentPage = 0, maxPages = 5, changeToPage = sinon.stub()
+  pagination = true, pages = 10, currentPage = 1, maxPages = 5, changeToPage = sinon.stub()
 } = {}) =>
   shallow(
     <PaginationComponent
@@ -36,31 +37,39 @@ describe('PaginationComponent', () => {
     expect(tiles.length).to.be.equal(7);
 
     Array.from({ length: 5 }, (v, k) => k)
-      .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${i}-${i + 1}`));
-    expect(tiles.at(5).key()).to.be.equal('1-▸');
-    expect(tiles.at(6).key()).to.be.equal('9-⏩');
+      .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${i + 1}`));
+    expect(tiles.at(5).key()).to.be.equal('▸');
+    expect(tiles.at(6).key()).to.be.equal('⏩');
 
-    expect(tiles.at(0).hasClass('active')).to.be.equal(true);
+    expect(tiles.at(0).prop('active')).to.be.truthy;
+
     Array.from({ length: 6 }, (v, k) => k + 1)
-      .forEach(i => expect(tiles.at(i).hasClass('active')).to.be.equal(false));
+      .forEach(i => expect(tiles.at(i).prop('active')).to.be.falsy);
   });
 
-  it('should have last page as active out of 10', () => {
+  describe('last page active', () => {
     const wrapper = getWrapper({ currentPage: 9 });
-    expect(wrapper.find('.pagination'));
+
+    it('should render pagination component', () => expect(wrapper.find('.pagination')));
 
     const tiles = wrapper.find('.pagination').children();
 
-    expect(tiles.length).to.be.equal(7);
+    it('should have proper number of tiles', () => expect(tiles.length).to.be.equal(9));
 
-    expect(tiles.at(0).key()).to.be.equal('0-⏪');
-    expect(tiles.at(1).key()).to.be.equal('8-◂');
-    Array.from({ length: 5 }, (v, k) => k + 2)
-      .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${3 + i}-${3 + i + 1}`));
+    it('should have the go-to-first-page tile', () => expect(tiles.at(0).key()).to.be.equal('⏪'));
 
+    it('should have the go-to-previous-page tile', () => expect(tiles.at(1).key()).to.be.equal('◂'));
 
-    Array.from({ length: 5 }, (v, k) => k)
-      .forEach(i => expect(tiles.at(i).hasClass('active')).to.be.equal(false));
-    expect(tiles.at(6).hasClass('active')).to.be.equal(true);
+    it('should have the correct tiles displayed', () => Array.from({ length: 5 }, (v, k) => k + 2)
+      .forEach(i => expect(tiles.at(i).key()).to.be.equal(`${3 + i + 1}`)));
+
+    it('should have the go-to-next-page tile', () => expect(tiles.at(7).key()).to.be.equal('▸'));
+
+    it('should have the go-to-last-page tile', () => expect(tiles.at(8).key()).to.be.equal('⏩'));
+
+    it('should not have active prop for any tile but last', () => Array.from({ length: 5 }, (v, k) => k)
+      .forEach(i => expect(tiles.at(i).prop('active')).to.be.falsy));
+
+    it('should have active prop for last tile', () => expect(tiles.at(6).prop('active')).to.be.truthy);
   });
 });

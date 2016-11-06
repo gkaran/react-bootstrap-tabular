@@ -1,7 +1,7 @@
 import React from 'react';
 import Th from './Th';
 
-class TableHead extends React.Component {
+class THead extends React.Component {
 
   render() {
     return (
@@ -23,11 +23,11 @@ class TableHead extends React.Component {
 
 }
 
-TableHead.propTypes = {
+THead.propTypes = {
   columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   sortColumn: React.PropTypes.object,
   sortOrder: React.PropTypes.number,
   sortBy: React.PropTypes.func.isRequired,
 };
 
-export default TableHead;
+export default THead;

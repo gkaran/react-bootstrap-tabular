@@ -1,25 +1,24 @@
 import React from 'react';
-import TableCell from './TableCell';
-
-const columnToCell = (column, row, totals) => <TableCell
-  cell={row[column.property]}
-  row={row}
-  alignment={column.align}
-  format={totals ? column.formatTotal || column.format : column.format}
-/>;
+import Td from './Td';
 
 const TableRow = ({ columns, row, totals }) => (
-  <tr key={row}>{columns.map(c => columnToCell(c, row, totals))}</tr>
+  <tr>
+    {
+      columns.map(c => <Td
+        key={row[c.property] || `empty-${c.property}`}
+        cell={row[c.property]}
+        row={row}
+        alignment={c.align}
+        format={totals ? c.formatTotal || c.format : c.format}
+      />)
+    }
+  </tr>
 );
 
 TableRow.propTypes = {
-  columns: React.PropTypes.object.isRequired,
-  row: React.PropTypes.array.isRequired,
-  totals: React.PropTypes.bool,
-};
-
-TableRow.defaultProps = {
-  totals: false,
+  columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  row: React.PropTypes.object.isRequired,
+  totals: React.PropTypes.bool
 };
 
 export default TableRow;

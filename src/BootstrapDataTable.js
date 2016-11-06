@@ -22,7 +22,7 @@ class BootstrapDataTable extends React.Component {
       },
       pagination: {
         pages: [],
-        activePage: 0
+        activePage: 1
       },
       searching: {
         term: ''
@@ -68,7 +68,7 @@ class BootstrapDataTable extends React.Component {
       },
       pagination: {
         pages: { $set: pages },
-        activePage: { $set: 0 }
+        activePage: { $set: 1 }
       }
     }));
   }
@@ -114,7 +114,7 @@ class BootstrapDataTable extends React.Component {
 
   render() {
     const tableDisplayData = this.props.pagination
-      ? this.state.pagination.pages[this.state.pagination.activePage] || []
+      ? this.state.pagination.pages[this.state.pagination.activePage - 1] || []
       : this.state.data;
 
     return (

@@ -14,17 +14,11 @@ const sortImpl = (column, sortOrder) => (a, b) => {
 export const sort = (data, column, sortOrder = SORT_ASCENDING) =>
   data.slice().sort(sortImpl(column, sortOrder));
 
-export const splitToPages = (data, pageSize, pagination) => {
+export const splitToPages = (data, pageSize) => {
+  const dataCopy = data.slice();
   const pages = [];
-  if (pagination) {
-    let i = 0;
-    let page = data.slice(i, i + pageSize);
-    while (page.length) {
-      pages.push(page);
-      i += pageSize;
-      page = data.slice(i, i + pageSize);
-    }
+  while (dataCopy.length > 0) {
+    pages.push(dataCopy.splice(0, pageSize));
   }
-
   return pages;
 };

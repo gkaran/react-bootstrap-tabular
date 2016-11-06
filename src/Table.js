@@ -1,6 +1,6 @@
 import React from 'react';
-import TableHead from './TableHead';
-import TableBody from './TableBody';
+import THead from './THead';
+import TBody from './TBody';
 import { SORT_ASCENDING, SORT_DESCENDING } from './utils/data-helpers';
 
 class Table extends React.Component {
@@ -14,13 +14,13 @@ class Table extends React.Component {
 
     const table = (
       <table className={tableClassNames}>
-        <TableHead
+        <THead
           columns={this.props.columns}
           sortBy={this.props.sortBy}
           sortColumn={this.props.sortColumn}
           sortOrder={this.props.sortOrder}
         />
-        <TableBody
+        <TBody
           data={this.props.data}
           columns={this.props.columns}
           totals={this.props.reducedData}
@@ -43,7 +43,7 @@ Table.propTypes = {
   condensed: React.PropTypes.bool,
   responsive: React.PropTypes.bool,
   columns: React.PropTypes.array.isRequired,
-  sortColumn: React.PropTypes.string,
+  sortColumn: React.PropTypes.object,
   sortOrder: React.PropTypes.oneOf([SORT_ASCENDING, SORT_DESCENDING]),
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   sortBy: React.PropTypes.func.isRequired,

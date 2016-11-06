@@ -17,8 +17,9 @@ class Th extends React.Component {
   }
 
   render() {
+    const style = this.props.column.sortable ? { cursor: 'pointer' } : {};
     return (
-      <th onClick={this.handleClick} style={{ cursor: 'pointer' }}>
+      <th onClick={this.handleClick} style={style}>
         {this.props.column.name}
         <SortIndicator
           column={this.props.column}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TableCell extends React.Component {
+class Td extends React.Component {
 
   render() {
     return (
@@ -12,15 +12,11 @@ class TableCell extends React.Component {
 
 }
 
-TableCell.propTypes = {
-  cell: React.PropTypes.oneOf(
-    React.PropTypes.string, React.PropTypes.number
-  ).isRequired,
-  row: React.PropTypes.arrayOf(React.PropTypes.oneOf(
-    React.PropTypes.string, React.PropTypes.number
-  )).isRequired,
+Td.propTypes = {
+  cell: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+  row: React.PropTypes.object.isRequired,
   format: React.PropTypes.func,
   alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
 };
 
-export default TableCell;
+export default Td;
