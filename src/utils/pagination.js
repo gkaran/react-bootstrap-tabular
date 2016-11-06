@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const isFloat = x => x % 1 !== 0;
 
 export const calcPaginationTiles = (activePage, visiblePages, numberOfPages) => {
