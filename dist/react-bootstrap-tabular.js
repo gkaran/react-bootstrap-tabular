@@ -1255,6 +1255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	/* eslint-disable import/prefer-default-export */
 	var isFloat = function isFloat(x) {
 	  return x % 1 !== 0;
 	};
