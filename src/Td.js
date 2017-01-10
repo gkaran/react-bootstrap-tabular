@@ -13,7 +13,7 @@ class Td extends React.Component {
 }
 
 Td.propTypes = {
-  cell: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+  cell: React.PropTypes.any(),
   row: React.PropTypes.object.isRequired,
   format: React.PropTypes.func,
   alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
