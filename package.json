@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-tabular",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React Bootstrap Table Component",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "transpile": "babel src --loose --out-dir lib",
     "dist": "webpack lib/index.js dist/react-bootstrap-tabular.js --display-modules --progress && cross-env NODE_ENV=production webpack lib/index.js dist/react-bootstrap-tabular.min.js --display-modules --progress",
     "build": "npm run transpile && npm run dist && npm run docs:update-lib",
-    "prepublish": "npm run clean && npm run build && npm run docs:update-lib",
+    "prepublish": "npm run clean && npm run build",
     "docs:update-lib": "cpx dist/*.min.js docs/js",
     "test": "mocha --compilers js:babel-core/register --colors --recursive test",
     "test:watch": "mocha --compilers js:babel-core/register --colors -w --recursive test",

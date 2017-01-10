@@ -409,7 +409,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	BootstrapDataTable.defaultProps = {
 	  pageSize: 10,
-	  maxPages: 5
+	  maxPages: 5,
+	  pagination: false,
+	  searchable: false
 	};
 
 	exports.default = BootstrapDataTable;
@@ -1068,9 +1070,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return _react2.default.createElement(
 	    'tr',
 	    null,
-	    columns.map(function (c) {
+	    columns.map(function (c, i) {
 	      return _react2.default.createElement(_Td2.default, {
-	        key: row[c.property] || 'empty-' + c.property,
+	        key: i + '-' + row[c.property] || i + '-empty-' + c.property,
 	        cell: row[c.property],
 	        row: row,
 	        alignment: c.align,
@@ -1137,7 +1139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Td.propTypes = {
-	  cell: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+	  cell: _react2.default.PropTypes.any(),
 	  row: _react2.default.PropTypes.object.isRequired,
 	  format: _react2.default.PropTypes.func,
 	  alignment: _react2.default.PropTypes.oneOf(['left', 'center', 'right'])
