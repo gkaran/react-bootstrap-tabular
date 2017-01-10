@@ -1139,7 +1139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_react2.default.Component);
 
 	Td.propTypes = {
-	  cell: _react2.default.PropTypes.any(),
+	  cell: _react2.default.PropTypes.any,
 	  row: _react2.default.PropTypes.object.isRequired,
 	  format: _react2.default.PropTypes.func,
 	  alignment: _react2.default.PropTypes.oneOf(['left', 'center', 'right'])
