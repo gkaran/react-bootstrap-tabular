@@ -4,8 +4,8 @@ import Td from './Td';
 const TableRow = ({ columns, row, totals }) => (
   <tr>
     {
-      columns.map(c => <Td
-        key={row[c.property] || `empty-${c.property}`}
+      columns.map((c, i) => <Td
+        key={`${i}-${row[c.property]}` || `${i}-empty-${c.property}`}
         cell={row[c.property]}
         row={row}
         alignment={c.align}
