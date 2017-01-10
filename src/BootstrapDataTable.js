@@ -168,7 +168,9 @@ BootstrapDataTable.propTypes = {
 
 BootstrapDataTable.defaultProps = {
   pageSize: 10,
-  maxPages: 5
+  maxPages: 5,
+  pagination: false,
+  searchable: false
 };
 
 export default BootstrapDataTable;
