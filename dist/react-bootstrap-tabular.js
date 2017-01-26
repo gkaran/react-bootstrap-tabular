@@ -276,7 +276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              term = term.toLowerCase();
 	            }
 
-	            if (column.indexOf(term) >= 0) {
+	            if (columnValue.indexOf(term) >= 0) {
 	              return true;
 	            }
 	          }
