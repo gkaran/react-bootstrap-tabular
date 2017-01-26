@@ -23,6 +23,7 @@ class Table extends React.Component {
         <TBody
           data={this.props.data}
           columns={this.props.columns}
+          totalsRowClass={this.props.totalsRowClass}
           totals={this.props.reducedData}
         />
       </table>
@@ -47,7 +48,8 @@ Table.propTypes = {
   sortOrder: React.PropTypes.oneOf([SORT_ASCENDING, SORT_DESCENDING]),
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   sortBy: React.PropTypes.func.isRequired,
-  reducedData: React.PropTypes.object
+  reducedData: React.PropTypes.object,
+  totalsRowClass: React.PropTypes.string
 };
 
 export default Table;

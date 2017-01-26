@@ -1,8 +1,8 @@
 import React from 'react';
 import Td from './Td';
 
-const TableRow = ({ columns, row, totals }) => (
-  <tr>
+const TableRow = ({ columns, row, totals, rowClass }) => (
+  <tr className={rowClass}>
     {
       columns.map((c, i) => <Td
         key={`${i}-${row[c.property]}` || `${i}-empty-${c.property}`}
@@ -18,7 +18,12 @@ const TableRow = ({ columns, row, totals }) => (
 TableRow.propTypes = {
   columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   row: React.PropTypes.object.isRequired,
-  totals: React.PropTypes.bool
+  totals: React.PropTypes.bool,
+  rowClass: React.PropTypes.string
+};
+
+TableRow.defaultProps = {
+  rowClass: ''
 };
 
 export default TableRow;

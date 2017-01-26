@@ -146,6 +146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  showTotal: _react2.default.PropTypes.bool,
 	  sortable: _react2.default.PropTypes.bool,
 	  includeInSearch: _react2.default.PropTypes.bool,
+	  searchCaseSensitive: _react2.default.PropTypes.bool,
 	  align: _react2.default.PropTypes.oneOf(['left', 'center', 'right'])
 	};
 
@@ -153,7 +154,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  showTotal: false,
 	  sortable: false,
 	  includeInSearch: false,
-	  align: 'left'
+	  align: 'left',
+	  searchCaseSensitive: false
 	};
 
 	exports.default = BootstrapDataColumn;
@@ -256,8 +258,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var searchTerm = e.target.value;
 	      var searchableColumns = this.state.columns.filter(function (c) {
 	        return c.includeInSearch;
-	      }).map(function (c) {
-	        return c.property;
 	      });
 
 	      var data = this.state.initialData.slice().filter(function (row) {
@@ -269,7 +269,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          for (var _iterator = searchableColumns[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	            var column = _step.value;
 
-	            if (('' + (row[column] || '')).indexOf(searchTerm) >= 0) {
+	            var columnValue = row[column.property] || '';
+	            var term = searchTerm;
+	            if (!column.searchCaseSensitive) {
+	              columnValue = columnValue.toLowerCase();
+	              term = term.toLowerCase();
+	            }
+
+	            if (column.indexOf(term) >= 0) {
 	              return true;
 	            }
 	          }
@@ -377,7 +384,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          striped: this.props.striped,
 	          sortColumn: this.state.sorting.column,
 	          sortOrder: this.state.sorting.order,
-	          reducedData: this.state.reducedData
+	          reducedData: this.state.reducedData,
+	          totalsRowClass: this.props.totalsRowClass
 	        }),
 	        _react2.default.createElement(_PaginationComponent2.default, {
 	          currentPage: this.state.pagination.activePage,
@@ -404,7 +412,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  pageSize: _react2.default.PropTypes.number,
 	  maxPages: _react2.default.PropTypes.number,
 	  searchable: _react2.default.PropTypes.bool,
-	  children: _react2.default.PropTypes.node
+	  children: _react2.default.PropTypes.node,
+	  totalsRowClass: _react2.default.PropTypes.string
 	};
 
 	BootstrapDataTable.defaultProps = {
@@ -849,6 +858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          });
 	        }),
 	        Object.keys(totals).length ? _react2.default.createElement(_TableRow2.default, {
+	          rowClass: this.props.totalsRowClass,
 	          key: Object.values(totals).join('-'),
 	          row: totals,
 	          columns: columns, totals: true
@@ -863,7 +873,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	TBody.propTypes = {
 	  data: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
 	  columns: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
-	  totals: _react2.default.PropTypes.object
+	  totals: _react2.default.PropTypes.object,
+	  totalsRowClass: _react2.default.PropTypes.string
 	};
 
 	TBody.defaultProps = {
@@ -1008,6 +1019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2.default.createElement(_TBody2.default, {
 	          data: this.props.data,
 	          columns: this.props.columns,
+	          totalsRowClass: this.props.totalsRowClass,
 	          totals: this.props.reducedData
 	        })
 	      );
@@ -1037,7 +1049,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  sortOrder: _react2.default.PropTypes.oneOf([_dataHelpers.SORT_ASCENDING, _dataHelpers.SORT_DESCENDING]),
 	  data: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
 	  sortBy: _react2.default.PropTypes.func.isRequired,
-	  reducedData: _react2.default.PropTypes.object
+	  reducedData: _react2.default.PropTypes.object,
+	  totalsRowClass: _react2.default.PropTypes.string
 	};
 
 	exports.default = Table;
@@ -1066,10 +1079,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TableRow = function TableRow(_ref) {
 	  var columns = _ref.columns,
 	      row = _ref.row,
-	      totals = _ref.totals;
+	      totals = _ref.totals,
+	      rowClass = _ref.rowClass;
 	  return _react2.default.createElement(
 	    'tr',
-	    null,
+	    { className: rowClass },
 	    columns.map(function (c, i) {
 	      return _react2.default.createElement(_Td2.default, {
 	        key: i + '-' + row[c.property] || i + '-empty-' + c.property,
@@ -1085,7 +1099,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	TableRow.propTypes = {
 	  columns: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
 	  row: _react2.default.PropTypes.object.isRequired,
-	  totals: _react2.default.PropTypes.bool
+	  totals: _react2.default.PropTypes.bool,
+	  rowClass: _react2.default.PropTypes.string
+	};
+
+	TableRow.defaultProps = {
+	  rowClass: ''
 	};
 
 	exports.default = TableRow;

@@ -13,6 +13,7 @@ class TBody extends React.Component {
           key={Object.values(entry).join('-')}
         />))}
         {Object.keys(totals).length ? <TableRow
+          rowClass={this.props.totalsRowClass}
           key={Object.values(totals).join('-')}
           row={totals}
           columns={columns} totals
@@ -25,7 +26,8 @@ class TBody extends React.Component {
 TBody.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   columns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  totals: React.PropTypes.object
+  totals: React.PropTypes.object,
+  totalsRowClass: React.PropTypes.string
 };
 
 TBody.defaultProps = {

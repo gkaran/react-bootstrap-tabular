@@ -90,3 +90,7 @@ code, kbd, pre, samp {
   color: #43804a;
   font-weight: bold;
 }
+
+.totals-row {
+  background-color: #e0e0e0;
+}

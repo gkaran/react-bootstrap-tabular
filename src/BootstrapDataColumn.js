@@ -10,6 +10,7 @@ BootstrapDataColumn.propTypes = {
   showTotal: React.PropTypes.bool,
   sortable: React.PropTypes.bool,
   includeInSearch: React.PropTypes.bool,
+  searchCaseSensitive: React.PropTypes.bool,
   align: React.PropTypes.oneOf(['left', 'center', 'right']),
 };
 
@@ -18,6 +19,7 @@ BootstrapDataColumn.defaultProps = {
   sortable: false,
   includeInSearch: false,
   align: 'left',
+  searchCaseSensitive: false
 };
 
 export default BootstrapDataColumn;

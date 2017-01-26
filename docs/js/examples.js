@@ -337,6 +337,7 @@ class TestComponent extends React.Component {
                 pageSize={this.state.pageSize}
                 searchable={this.state.searchable}
                 pagination={this.state.pagination}
+                totalsRowClass={'totals-row'}
                 condensed={this.state.condensed}>
                 <BootstrapDataColumn
                   property={'id'}

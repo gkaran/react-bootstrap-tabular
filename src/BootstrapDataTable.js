@@ -45,11 +45,18 @@ class BootstrapDataTable extends React.Component {
 
   onSearchTermChanged(e) {
     const searchTerm = e.target.value;
-    const searchableColumns = this.state.columns.filter(c => c.includeInSearch).map(c => c.property);
+    const searchableColumns = this.state.columns.filter(c => c.includeInSearch);
 
     let data = this.state.initialData.slice().filter((row) => {
       for (const column of searchableColumns) {
-        if (`${row[column] || ''}`.indexOf(searchTerm) >= 0) {
+        let columnValue = row[column.property] || '';
+        let term = searchTerm;
+        if (!column.searchCaseSensitive) {
+          columnValue = columnValue.toLowerCase();
+          term = term.toLowerCase();
+        }
+
+        if (column.indexOf(term) >= 0) {
           return true;
         }
       }
@@ -137,6 +144,7 @@ class BootstrapDataTable extends React.Component {
           sortColumn={this.state.sorting.column}
           sortOrder={this.state.sorting.order}
           reducedData={this.state.reducedData}
+          totalsRowClass={this.props.totalsRowClass}
         />
 
         <PaginationComponent
@@ -163,7 +171,8 @@ BootstrapDataTable.propTypes = {
   pageSize: React.PropTypes.number,
   maxPages: React.PropTypes.number,
   searchable: React.PropTypes.bool,
-  children: React.PropTypes.node
+  children: React.PropTypes.node,
+  totalsRowClass: React.PropTypes.string
 };
 
 BootstrapDataTable.defaultProps = {
