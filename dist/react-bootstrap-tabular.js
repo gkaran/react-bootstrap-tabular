@@ -850,16 +850,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        'tbody',
 	        null,
-	        this.props.data.map(function (entry) {
+	        this.props.data.map(function (entry, i) {
 	          return _react2.default.createElement(_TableRow2.default, {
 	            columns: _this2.props.columns,
 	            row: entry,
-	            key: Object.values(entry).join('-')
+	            key: i
 	          });
 	        }),
 	        Object.keys(totals).length ? _react2.default.createElement(_TableRow2.default, {
 	          rowClass: this.props.totalsRowClass,
-	          key: Object.values(totals).join('-'),
+	          key: -1,
 	          row: totals,
 	          columns: columns, totals: true
 	        }) : null
