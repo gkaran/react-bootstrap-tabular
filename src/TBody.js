@@ -7,14 +7,14 @@ class TBody extends React.Component {
     const { totals, columns } = this.props;
     return (
       <tbody>
-        {this.props.data.map(entry => (<TableRow
+        {this.props.data.map((entry, i) => (<TableRow
           columns={this.props.columns}
           row={entry}
-          key={Object.values(entry).join('-')}
+          key={i}
         />))}
         {Object.keys(totals).length ? <TableRow
           rowClass={this.props.totalsRowClass}
-          key={Object.values(totals).join('-')}
+          key={-1}
           row={totals}
           columns={columns} totals
         /> : null}
